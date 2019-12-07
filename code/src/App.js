@@ -4,12 +4,15 @@ import HappyForm from "./Components/HappyForm"
 
 export const App = () => {
   const [thoughts, setThoughts] = useState([])
-  const [postedMessage, setPostedMessage] = useState('')
-  useEffect(() => {
+  const getThoughts = () => {
     fetch("https://technigo-thoughts.herokuapp.com/")
       .then(res => res.json())
       .then(json => setThoughts(json))
-  }, [postedMessage])
+  }
+
+  useEffect(() => {
+    getThoughts()
+  }, [])
 
   const handleFormSubmit = (message) => {
     fetch("https://technigo-thoughts.herokuapp.com/", {
@@ -17,14 +20,27 @@ export const App = () => {
       body: JSON.stringify({ message }),
       headers: { "Content-Type": "application/JSON" }
     })
-      .then(() => setPostedMessage(message))
+      .then(() => {
+        getThoughts()
+      })
+  }
+
+  const handleAddHearts = (id) => {
+    fetch(`https://technigo-thoughts.herokuapp.com/${id}/like`, {
+      method: "POST",
+      headers: { "Content-Type": "application/JSON" }
+    })
+      .then((response) => {
+        getThoughts()
+      })
   }
 
   return (
     <div>
-      <HappyForm onFormSubmit={handleFormSubmit} />
+      <HappyForm onFormSubmit={(message) => handleFormSubmit(message)} />
       {thoughts.map(thought => (
-        <HappyThought key={thoughts._id} thought={thought} />
+        <HappyThought key={thought._id} thought={thought} addHearts={() => handleAddHearts(thought._id)} />
+
       ))}
     </div>
   )

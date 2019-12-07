@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 const HappyForm = ({ onFormSubmit }) => {
   const [message, setMessage] = useState('')
@@ -6,16 +6,18 @@ const HappyForm = ({ onFormSubmit }) => {
   const handleSubmit = (event) => {
     event.preventDefault()
     onFormSubmit(message)
+    setMessage("")
   }
 
   return (
     <form>
-      <h3>Post a happy thought</h3>
+      <h3>What is making you happy right now?</h3>
       <textarea
+        value={message}
         rows="3"
         onChange={event => setMessage(event.target.value)}
       ></textarea>
-      <button type="submit" onClick={handleSubmit}>Submit Happy Thought!</button>
+      <button type="submit" onClick={handleSubmit}>Send Happy Thought</button>
     </form >
   )
 }
