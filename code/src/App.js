@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import HappyThought from "./Components/HappyThought"
 import HappyForm from "./Components/HappyForm"
+import { AppWrapper } from 'Components/styles'
 
 export const App = () => {
+
+  const urlThoughts = "https://technigo-thoughts.herokuapp.com/"
   const [thoughts, setThoughts] = useState([])
   const getThoughts = () => {
-    fetch("https://technigo-thoughts.herokuapp.com/")
+    fetch(urlThoughts)
       .then(res => res.json())
       .then(json => setThoughts(json))
   }
@@ -15,7 +18,7 @@ export const App = () => {
   }, [])
 
   const handleFormSubmit = (message) => {
-    fetch("https://technigo-thoughts.herokuapp.com/", {
+    fetch(urlThoughts, {
       method: "POST",
       body: JSON.stringify({ message }),
       headers: { "Content-Type": "application/JSON" }
@@ -30,18 +33,18 @@ export const App = () => {
       method: "POST",
       headers: { "Content-Type": "application/JSON" }
     })
-      .then((response) => {
+      .then(() => {
         getThoughts()
       })
   }
 
   return (
-    <div>
+    <AppWrapper>
       <HappyForm onFormSubmit={(message) => handleFormSubmit(message)} />
       {thoughts.map(thought => (
         <HappyThought key={thought._id} thought={thought} addHearts={() => handleAddHearts(thought._id)} />
 
       ))}
-    </div>
+    </AppWrapper>
   )
 }

@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { FormWrapper, FormButton } from "./styles"
+import Heart from "../static/heart.svg"
 
 const HappyForm = ({ onFormSubmit }) => {
   const [message, setMessage] = useState('')
@@ -6,19 +8,22 @@ const HappyForm = ({ onFormSubmit }) => {
   const handleSubmit = (event) => {
     event.preventDefault()
     onFormSubmit(message)
-    setMessage("")
+    setMessage('')
   }
 
   return (
-    <form>
+
+    <FormWrapper>
       <h3>What is making you happy right now?</h3>
       <textarea
         value={message}
         rows="3"
         onChange={event => setMessage(event.target.value)}
       ></textarea>
-      <button type="submit" onClick={handleSubmit}>Send Happy Thought</button>
-    </form >
+
+      <FormButton type="submit" role="button" tabIndex="0" onClick={handleSubmit}><img src={Heart} alt="heart icon" />
+        Send Happy Thought<img src={Heart} alt="heart icon" /></FormButton>
+    </FormWrapper>
   )
 }
 
