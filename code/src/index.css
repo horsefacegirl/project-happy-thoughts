@@ -11,6 +11,14 @@ h1 {
   font-size: 1.4rem;
 }
 
+h3 {
+  font-size: 1.2rem;
+}
+
+h4 {
+  margin: 0;
+}
+
 p {
   color: #A4A4A4;
 }

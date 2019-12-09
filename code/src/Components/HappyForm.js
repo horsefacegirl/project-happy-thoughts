@@ -22,7 +22,7 @@ const HappyForm = ({ onFormSubmit }) => {
       ></textarea>
 
       <FormButton type="submit" role="button" tabIndex="0" onClick={handleSubmit}><img src={Heart} alt="heart icon" />
-        Send Happy Thought<img src={Heart} alt="heart icon" /></FormButton>
+        <h4>Send Happy Thought</h4><img src={Heart} alt="heart icon" /></FormButton>
     </FormWrapper>
   )
 }
