@@ -14,6 +14,9 @@ width: 560px;
 box-shadow: 7px 7px 0px 0px rgba(0,0,0,1);
 padding: 0 1rem 1rem;
 margin-bottom: 2rem;
+@media (max-width: 600px) {
+width: 100%;
+}
 `
 export const FormButton = styled.div`
 width: 50%;
@@ -41,7 +44,6 @@ padding: 1rem;
 display: flex;
 justify-content: center;
 margin-right: 1rem;
-
 `
 
 
